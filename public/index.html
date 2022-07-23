@@ -11,14 +11,41 @@
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>   uncomment this if you want to use jquery--> 
 	<script src="script.js"></script>
   <div>
-    <h1>hi</h1>
-  </div>
-  <div>
-    <button id='timerButton' name='timerButton' onclick='startTimer();'>
-      Start Timer
-    </button>
-    <h2>time is: <p id='timer'></p>
-    </h2>
+    <div>
+      <h1>
+        Enter information before match:
+      </h1>
+      Enter scout's name: <input type='text' id='scoutName'><br><br>
+      Enter Team number: <input type='number' id='teamNumber'><br><br>
+      Select team alliance position: <form>
+        <input type='radio' name='teamPosition' value='r1'>
+        <label for="r1">Red 1</label>
+        <input type='radio' name='teamPosition' value='b1'>
+        <label for="r2">Blue 1</label><br>
+        <input type='radio' name='teamPosition' value='r2'>
+        <label for="r3">Red 2</label>
+        <input type='radio' name='teamPosition' value='b2'>
+        <label for="b1">Blue 2</label><br>
+        <input type='radio' name='teamPosition' value='r3'>
+        <label for="b2">Red 3</label>
+        <input type='radio' name='teamPosition' value='b3'>
+        <label for="b3">Blue 3</label>
+      </form><br>
+      Select robot's starting position: <form>
+        <input type='radio' name='robotPosition' value='pos1'>
+        <label for="pos1">Position 1</label><br>
+        <input type='radio' name='robotPosition' value='pos2'>
+        <label for="pos2">Position 2</label><br>
+        <input type='radio' name='robotPosition' value='pos3'>
+        <label for="pos3">Position 3</label>
+      </form><br>
+    </div>
+    <div>
+      <button id='timerButton' name='timerButton' onclick='startTimer();'>
+        Start Timer
+      </button>
+      <p id='timer'></p>
+    </div>
   </div>
 </body>
 </html>

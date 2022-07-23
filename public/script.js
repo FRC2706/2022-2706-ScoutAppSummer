@@ -1,6 +1,6 @@
 //for all things javascript
 
-function startTimer() {
+function startTimer() { //this function is used to start the timer countdown
     // Set the date we're counting down to
     var countDownDate = new Date(); //get the current time, then find the time in 2:30 minutes later
     countDownDate.setSeconds(countDownDate.getSeconds() + 151); //+1 for delay | 150 seconds = 2:30 minutes
