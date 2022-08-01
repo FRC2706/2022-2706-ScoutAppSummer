@@ -1,12 +1,19 @@
 //for all things javascript
+
+//https://github.com/davidshimjs/qrcodejs
+//https://youtu.be/oR_u2TbHwC8
+
+
 var time = {}; //stores time variables ('minutes' and 'seconds') in this globally scoped variable 'time'
 
 function startTimer() { //this function is used to start the timer countdown
   var timer = document.getElementById("timerButton"); //getting the timer button id...
   timer.style.display = "none"; //... to be able to hide it (to prevent timer resets). If the user does happen to need to reset the timer they can refresh the page
+  var gameButtons = document.getElementById("gameTrackerButtons");
+  gameButtons.style.display = "block";
   var review = document.getElementById("reviewButton"); //here we'll hide the button that gives access to the next page to avoid accidental clicks. when the page is loaded, the button is already hidden
   var countDownDate = new Date(); //get the current time, then find the time in 2:30 minutes later
-  countDownDate.setSeconds(countDownDate.getSeconds() + 5); //+1 for delay | 150 seconds = 2:30 minutes
+  countDownDate.setSeconds(countDownDate.getSeconds() + 151); //+1 for delay | 150 seconds = 2:30 minutes
   //'repeat' is used to loop the following code block
   var repeat = setInterval(function() {
     var currentTime = new Date().getTime(); //get the current time
