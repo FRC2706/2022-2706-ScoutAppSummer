@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recording Match</title>
+</head>
+<body onload='fetchData();'>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>   uncomment this if you want to use jquery--> 
+	<script src="script.js"></script>
+
+  <div>
+    High Goals: 
+    <input id='highGoalBox' type='text'/>
+  </div>
+
+  <br><br>
+  Comments: <form>
+    <input type='checkbox' name='comment' value='1'>
+    <label for="1">Inconsistent scoring / Missing often</label><br>
+    <input type='checkbox' name='comment' value='2'>
+    <label for="2">Agressive driving</label><br>
+    <input type='checkbox' name='comment' value='3'>
+    <label for="3">Played mostly defensively</label><br>
+    <input type='checkbox' name='comment' value='4'>
+    <label for="4">Looks unstable / Could fall over</label><br>
+    <input type='checkbox' name='comment' value='5'>
+    <label for="5">Basically a GodBot</label><br>
+    <label>Other: </label>
+    <input type='text' id='commentOther'>
+
+  </form>
+
+  <br><br>
+  <button>
+      <a href='qr.html'>Generate QR Code</a>
+  </button>
+
+</body>
+</html>
