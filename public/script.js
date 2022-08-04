@@ -39,6 +39,30 @@ function confirmation(page) { //to use this function pass the 'return' location 
   }
 }
 
+function preGameData() {
+  localStorage.cleaer("alliancePosition"); //clears localStorage
+  localStorage.clear("startingPosition");
+
+  if(document.getElementById('alliancePosition').checked) {
+    localStorage.setItem("alliancePosition", 'r1');
+  } //else if
+
+  if(document.getElementById('pos1').checked) { //saves robots starting position in localStorage
+    localStorage.setItem("startingPosition", '1');
+  } else if (document.getElementById('pos2').checked) {
+    localStorage.setItem("startingPosition", '2');
+  } else if (document.getElementById('pos3').checked){
+    localStorage.setItem("startingPosition", '3');
+  } else {
+    alert("eyo you forgor to select");
+  }
+
+  if (localStorage.getItem("startingPosition") != null) {
+    window.location = 'recording.html';
+  }
+  
+}
+
 //game type dependent functions below
 
 var highGoals = [];
