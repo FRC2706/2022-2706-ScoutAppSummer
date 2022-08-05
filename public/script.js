@@ -40,24 +40,39 @@ function confirmation(page) { //to use this function pass the 'return' location 
 }
 
 function preGameData() {
-  localStorage.cleaer("alliancePosition"); //clears localStorage
-  localStorage.clear("startingPosition");
+  localStorage.clear('alliancePosition'); //clears localStorage
+  localStorage.clear('startingPosition');
 
-  if(document.getElementById('alliancePosition').checked) {
-    localStorage.setItem("alliancePosition", 'r1');
-  } //else if
+  localStorage.setItem('scoutName', (document.getElementById("scoutName")).value);
+  localStorage.setItem("teamNumber", (document.getElementById("teamNumber")).value);
 
-  if(document.getElementById('pos1').checked) { //saves robots starting position in localStorage
-    localStorage.setItem("startingPosition", '1');
-  } else if (document.getElementById('pos2').checked) {
-    localStorage.setItem("startingPosition", '2');
-  } else if (document.getElementById('pos3').checked){
-    localStorage.setItem("startingPosition", '3');
+  if(document.getElementById('posr1').checked) { //saves robot's alliance position in localStorage
+    localStorage.setItem('alliancePosition', 'r1');
+  } else if (document.getElementById('posr2').checked) {
+    localStorage.setItem('alliancePosition', 'r2');
+  } else if (document.getElementById('posr3').checked) {
+    localStorage.setItem('alliancePosition', 'r3');
+  } else if (document.getElementById('posb1').checked) {
+    localStorage.setItem('alliancePosition', 'b1');
+  } else if (document.getElementById('posb2').checked) {
+    localStorage.setItem('alliancePosition', 'b2');
+  } else if (document.getElementById('posb3').checked) {
+    localStorage.setItem('alliancePosition', 'b3');
   } else {
-    alert("eyo you forgor to select");
+    alert("You didn't select an alliance position.")
   }
 
-  if (localStorage.getItem("startingPosition") != null) {
+  if(document.getElementById('pos1').checked) { //saves robot's starting position in localStorage
+    localStorage.setItem('startingPosition', '1');
+  } else if (document.getElementById('pos2').checked) {
+    localStorage.setItem('startingPosition', '2');
+  } else if (document.getElementById('pos3').checked){
+    localStorage.setItem('startingPosition', '3');
+  } else {
+    alert("You didn't select a starting position.");
+  }
+
+  if (localStorage.getItem("alliancePosition") != null && localStorage.getItem("startingPosition") != null) {
     window.location = 'recording.html';
   }
   
@@ -69,6 +84,10 @@ var highGoals = [];
 var lowGoals = [];
 
 function fetchData() {
+  document.getElementById("scoutName").value = localStorage.getItem('scoutName');
+  document.getElementById("teamNumber").value = localStorage.getItem('teamNumber');
+  document.getElementById("robotPosition").value = localStorage.getItem('startingPosition'); //add prefill
+  
   document.getElementById("highGoalBox").value = localStorage.getItem("highGoalAmount");
   //add for other boxes
 }
