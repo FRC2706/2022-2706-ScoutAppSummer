@@ -7,11 +7,11 @@
 var time = {}; //stores time variables ('minutes' and 'seconds') in this globally scoped variable 'time'
 
 function startTimer() { //this function is used to start the timer countdown
-  var timer = document.getElementById("timerButton"); //getting the timer button id...
-  timer.style.display = "none"; //... to be able to hide it (to prevent timer resets). If the user does happen to need to reset the timer they can refresh the page
-  var gameButtons = document.getElementById("gameTrackerButtons");
-  gameButtons.style.display = "block";
-  var review = document.getElementById("reviewButton"); //here we'll hide the button that gives access to the next page to avoid accidental clicks. when the page is loaded, the button is already hidden
+  var timer = document.getElementById('timerButton'); //getting the timer button id...
+  timer.style.display = 'none'; //... to be able to hide it (to prevent timer resets). If the user does happen to need to reset the timer they can refresh the page
+  var gameButtons = document.getElementById('gameTrackerButtons');
+  gameButtons.style.display = 'block';
+  var review = document.getElementById('reviewButton'); //here we'll hide the button that gives access to the next page to avoid accidental clicks. when the page is loaded, the button is already hidden
   var countDownDate = new Date(); //get the current time, then find the time in 2:30 minutes later
   countDownDate.setSeconds(countDownDate.getSeconds() + 151); //+1 for delay | 150 seconds = 2:30 minutes
   //'repeat' is used to loop the following code block
@@ -20,11 +20,11 @@ function startTimer() { //this function is used to start the timer countdown
     var timeLeft = countDownDate - currentTime; //calculate how much time is left
     time.minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60)); //calculate minutes
     time.seconds = Math.floor((timeLeft % (1000 * 60)) / 1000); //calculate seconds (credits to https://www.w3schools.com/howto/howto_js_countdown.asp)
-    document.getElementById("timer").innerHTML = time.minutes + "m " + time.seconds + "s "; //print the timer
+    document.getElementById('timer').innerHTML = time.minutes + 'm ' + time.seconds + 's '; //print the timer
     if (timeLeft < 0) { //if the timer goes to 0, prints that the game is over
       clearInterval(repeat); //stops repeating
-      document.getElementById("timer").innerHTML = "GAME OVER"; //prints 'GAME OVER'
-      review.style.display = "block"; //show the review button
+      document.getElementById('timer').innerHTML = 'GAME OVER'; //prints 'GAME OVER'
+      review.style.display = 'block'; //show the review button
     }
   }, 1000);
 }
@@ -40,11 +40,13 @@ function confirmation(page) { //to use this function pass the 'return' location 
 }
 
 function preGameData() {
-  localStorage.clear('alliancePosition'); //clears localStorage
+  localStorage.clear('scoutName'); //clears localStorage
+  localStorage.clear('teamNumber');
+  localStorage.clear('alliancePosition');
   localStorage.clear('startingPosition');
 
-  localStorage.setItem('scoutName', (document.getElementById("scoutName")).value);
-  localStorage.setItem("teamNumber", (document.getElementById("teamNumber")).value);
+  localStorage.setItem('scoutName', (document.getElementById('scoutName')).value);
+  localStorage.setItem("teamNumber", (document.getElementById('teamNumber')).value);
 
   if(document.getElementById('posr1').checked) { //saves robot's alliance position in localStorage
     localStorage.setItem('alliancePosition', 'r1');
@@ -58,22 +60,20 @@ function preGameData() {
     localStorage.setItem('alliancePosition', 'b2');
   } else if (document.getElementById('posb3').checked) {
     localStorage.setItem('alliancePosition', 'b3');
-  } else {
-    alert("You didn't select an alliance position.")
   }
 
   if(document.getElementById('pos1').checked) { //saves robot's starting position in localStorage
-    localStorage.setItem('startingPosition', '1');
+    localStorage.setItem('startingPosition', 'pos1');
   } else if (document.getElementById('pos2').checked) {
-    localStorage.setItem('startingPosition', '2');
+    localStorage.setItem('startingPosition', 'pos2');
   } else if (document.getElementById('pos3').checked){
-    localStorage.setItem('startingPosition', '3');
-  } else {
-    alert("You didn't select a starting position.");
+    localStorage.setItem('startingPosition', 'pos3');
   }
 
-  if (localStorage.getItem("alliancePosition") != null && localStorage.getItem("startingPosition") != null) {
+  if (localStorage.getItem('scoutName') != '' && localStorage.getItem('teamNumber') != '' && localStorage.getItem('alliancePosition') != null && localStorage.getItem('startingPosition') != null) {
     window.location = 'recording.html';
+  } else {
+    alert('Some information is missing!');
   }
   
 }
@@ -84,16 +84,17 @@ var highGoals = [];
 var lowGoals = [];
 
 function fetchData() {
-  document.getElementById("scoutName").value = localStorage.getItem('scoutName');
-  document.getElementById("teamNumber").value = localStorage.getItem('teamNumber');
-  document.getElementById("robotPosition").value = localStorage.getItem('startingPosition'); //add prefill
+  document.getElementById('scoutName').value = localStorage.getItem('scoutName');
+  document.getElementById('teamNumber').value = localStorage.getItem('teamNumber');
+  console.log(localStorage.getItem('startingPosition'));
+  document.getElementById('robotPosition').value = localStorage.getItem('startingPosition'); //add prefill
   
-  document.getElementById("highGoalBox").value = localStorage.getItem("highGoalAmount");
+  document.getElementById('highGoalBox').value = localStorage.getItem('highGoalAmount');
   //add for other boxes
 }
 
 function highGoal() {
   t = checkTime(); //gets the current time
   highGoals.push(t); //logs the time in the 'highGoals' array | the length of this array is results in the number of scores
-  localStorage.setItem("highGoalAmount", highGoals.length); //logs data to show on review page (see fetchData())
+  localStorage.setItem('highGoalAmount', highGoals.length); //logs data to show on review page (see fetchData())
 }
