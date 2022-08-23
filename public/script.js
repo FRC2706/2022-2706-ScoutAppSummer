@@ -105,6 +105,9 @@ function highGoalReview() {
   highGoalsString = localStorage.getItem('highGoals'); //retreives 'localStorage' data (but it returns as a string)
   highGoalsString += ','; //just add a comma at the end. This is a work around to a bug that would miss the last time stamp
   var highGoalAmount = highGoalsString.split(",").length - 1; //checks the amount of time stamps by checking how many commas seperate them
+  var totalHighGoals = document.getElementById('highGoalTotal');
+  totalHighGoals.value = highGoalAmount;
+  totalHighGoals.placeholder = 'original count: ' + highGoalAmount; //shows original count if box in empty
   var tmpList = '';
   for (i=0;i<highGoalsString.length;i++) { //this loop just compiles all characters that represent one time stamp into one value..
     if (highGoalsString[i] != ',') {
