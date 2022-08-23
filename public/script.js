@@ -30,7 +30,7 @@ function startTimer() { //this function is used to start the timer countdown
 }
 
 function checkTime() { //this function is used to check the time left, it's used when logging robot actions
-  return [time.minutes, time.seconds];
+  return [time.minutes + 'm' + time.seconds + 's'];
 }
 
 function confirmation(page) { //to use this function pass the 'return' location in the 'page' variable. Ex: onclick='confirmation("index.html");'
@@ -40,11 +40,13 @@ function confirmation(page) { //to use this function pass the 'return' location 
 }
 
 function preGameData() {
+  localStorage.clear('matchNumber');
   localStorage.clear('scoutName'); //clears localStorage
   localStorage.clear('teamNumber');
   localStorage.clear('alliancePosition');
   localStorage.clear('startingPosition');
 
+  localStorage.setItem('matchNumber', (document.getElementById('matchNumber')).value);
   localStorage.setItem('scoutName', (document.getElementById('scoutName')).value);
   localStorage.setItem("teamNumber", (document.getElementById('teamNumber')).value);
 
@@ -84,17 +86,51 @@ var highGoals = [];
 var lowGoals = [];
 
 function fetchData() {
+  document.getElementById('matchNumber').value = localStorage.getItem('matchNumber'); //adds prefill
   document.getElementById('scoutName').value = localStorage.getItem('scoutName');
   document.getElementById('teamNumber').value = localStorage.getItem('teamNumber');
-  console.log(localStorage.getItem('startingPosition'));
-  document.getElementById('robotPosition').value = localStorage.getItem('startingPosition'); //add prefill
-  
-  document.getElementById('highGoalBox').value = localStorage.getItem('highGoalAmount');
-  //add for other boxes
+  document.getElementById('alliancePositionSpot').value = localStorage.getItem('alliancePosition');
+  document.getElementById('robotPosition').value = localStorage.getItem('startingPosition');
+
+  highGoalReview();
 }
 
 function highGoal() {
   t = checkTime(); //gets the current time
   highGoals.push(t); //logs the time in the 'highGoals' array | the length of this array is results in the number of scores
-  localStorage.setItem('highGoalAmount', highGoals.length); //logs data to show on review page (see fetchData())
+  localStorage.setItem('highGoals', highGoals); //logs data to show on review page (see fetchData())
+}
+
+function highGoalReview() {
+  highGoalsString = localStorage.getItem('highGoals'); //retreives 'localStorage' data (but it returns as a string)
+  highGoalsString += ','; //just add a comma at the end. This is a work around to a bug that would miss the last time stamp
+  var highGoalAmount = highGoalsString.split(",").length - 1; //checks the amount of time stamps by checking how many commas seperate them
+  var tmpList = '';
+  for (i=0;i<highGoalsString.length;i++) { //this loop just compiles all characters that represent one time stamp into one value..
+    if (highGoalsString[i] != ',') {
+      tmpList += highGoalsString[i];
+    } else {
+      highGoals.push(tmpList); //..and then that value is placed back into 'highGoals'
+      tmpList = [];
+    }
+  }
+  for (i=0;i<highGoalAmount;i++) { //for every goal, it calls 'createCheckbox()' for that timestamp
+    var goalTime = highGoals[i];
+    createCheckbox(goalTime);
+  }
+}
+
+function createCheckbox(checkboxLabel) { //this function creates a checkbox when it is called
+  var highGoalDiv = document.getElementById('highGoal');
+  var checkbox = document.createElement('input');
+  var label = document.createElement('label');
+  var br = document.createElement('br');
+  checkbox.type = 'checkbox';
+  checkbox.name = "name"; //might add these in the for loop too to be able to check which one is checked
+  checkbox.id = "id";
+  label.appendChild(document.createTextNode(checkboxLabel));// this will display the time
+  //add for loop
+  highGoalDiv.appendChild(checkbox);
+  highGoalDiv.appendChild(label);
+  highGoalDiv.appendChild(br);
 }

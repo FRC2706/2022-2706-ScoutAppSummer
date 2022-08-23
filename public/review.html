@@ -11,13 +11,26 @@
 	<script src="script.js"></script>
   <h1>Review:</h1>
   <div>
+    Match Number:
+    <input id='matchNumber' type='number'/><br><br>
     Scout Name:
     <input id='scoutName' type='text'/><br><br>
     Team Number:
     <input id='teamNumber' type='number'/><br><br>
+    Robot alliance position:
+    <form>
+      <select id='alliancePositionSpot'>
+        <option value='r1'>Red 1</option>
+        <option value='r2'>Red 2</option>
+        <option value='r3'>Red 3</option>
+        <option value='b1'>Blue 1</option>
+        <option value='b2'>Blue 2</option>
+        <option value='b3'>Blue 3</option>
+      </select>
+    </form><br>
     Robot starting position:
-    <form id='robotPosition'>
-      <select>
+    <form>
+      <select id='robotPosition'>
         <option value='pos1'>1</option>
         <option value='pos2'>2</option>
         <option value='pos3'>3</option>
@@ -25,7 +38,24 @@
     </form><br><br>
 
     High Goals: 
-    <input id='highGoalBox' type='text'/>
+    <!--<input id='highGoalBox' type='text'/>--> <!--make check box with all time goals and check the ones to remove (mistakes)-->
+    
+    <div id='highGoal'>
+
+    </div>
+
+    <table>
+      <tr>
+        <th>1</th>
+        <td>2m30s</td>
+        <button><td style='border: 1px solid black;'>x</td></button>  <!--//https://www.techiedelight.com/dynamically-create-checkbox-with-javascript/  ???-->
+      </tr>
+      <tr>
+        <th>2</th>
+        <td>1m24s</td>
+      </tr>
+    </table>
+
   </div>
 
   <br><br>
@@ -42,7 +72,6 @@
     <label for="5">Basically a GodBot</label><br>
     <label>Other: </label>
     <input type='text' id='commentOther'>
-
   </form>
 
   <br><br>
