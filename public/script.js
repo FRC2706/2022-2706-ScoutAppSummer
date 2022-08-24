@@ -102,8 +102,7 @@ function highGoal() {
 }
 
 function highGoalReview() {
-  highGoalsString = localStorage.getItem('highGoals'); //retreives 'localStorage' data (but it returns as a string)
-  highGoalsString += ','; //just add a comma at the end. This is a work around to a bug that would miss the last time stamp
+  highGoalsString = localStorage.getItem('highGoals') + ','; //retreives 'localStorage' data (but it returns as a string). Just add a comma at the end. This is a work around to a bug that would miss the last time stamp
   var highGoalAmount = highGoalsString.split(",").length - 1; //checks the amount of time stamps by checking how many commas seperate them
   var totalHighGoals = document.getElementById('highGoalTotal');
   totalHighGoals.value = highGoalAmount;
@@ -129,11 +128,47 @@ function createCheckbox(checkboxLabel) { //this function creates a checkbox when
   var label = document.createElement('label');
   var br = document.createElement('br');
   checkbox.type = 'checkbox';
-  checkbox.name = "name"; //might add these in the for loop too to be able to check which one is checked
-  checkbox.id = "id";
+  //checkbox.name = "name"; //might add these in the for loop too to be able to check which one is checked
+  checkbox.id = checkboxLabel;
   label.appendChild(document.createTextNode(checkboxLabel));// this will display the time
   //add for loop
   highGoalDiv.appendChild(checkbox);
   highGoalDiv.appendChild(label);
   highGoalDiv.appendChild(br);
+}
+
+function compile() {
+  var compilationMsg = document.getElementById('compilationMsg');
+  compilationMsg.disabled = true;
+  compilationMsg.innerHTML = 'Compiling Data...';
+
+  var highGoalData = '';
+  highGoalsString = localStorage.getItem('highGoals') + ','; //retreives 'localStorage' data (but it returns as a string). Just add a comma at the end. This is a work around to a bug that would miss the last time stamp
+  var tmpList = '';
+  for (i=0;i<highGoalsString.length;i++) { //for loop for every goal that occured
+    if (highGoalsString[i] != ',') { //seperates all timestamps by searching for the comma
+      tmpList += highGoalsString[i];  //find a way to skip over the mistakes
+    } else {
+      if (checkboxValue = document.getElementById(tmpList).checked == false) { //if the box isn't checked the it adds it to the high goal data
+        highGoalData += tmpList + '-';
+      }
+      tmpList = ''; //clears the tmp variable
+    }
+  }
+
+  var comments = '';
+  for (i=0;i<4;i++) { //logs comments offered in checkboxes
+    if (document.getElementById('com'+(i+1)).checked) {
+      comments += i+1;
+    }
+  }
+  var commentOther = document.getElementById('commentOther').value;
+  if (commentOther != null) { //logs any other comments written
+    comments += commentOther;
+  }
+
+  var data = document.getElementById('matchNumber').value+'|'+document.getElementById('scoutName').value+'|'+document.getElementById('teamNumber').value+'|'+document.getElementById('alliancePositionSpot').value+'|'+document.getElementById('robotPosition').value+'|'+document.getElementById('highGoalTotal').value+'|'+highGoalData+'|'+comments+'|';
+  localStorage.setItem('data', data); //saves the data to be able to use it on the next page
+  //window.location = 'qr.html';
+  console.log(data);
 }

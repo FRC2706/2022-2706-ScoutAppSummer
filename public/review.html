@@ -44,23 +44,23 @@
 
   <br><br>
   Comments: <form>
-    <input type='checkbox' name='comment' value='1'>
+    <input type='checkbox' id='com1' name='comment' value='1'>
     <label for="1">Inconsistent scoring / Missing often</label><br>
-    <input type='checkbox' name='comment' value='2'>
+    <input type='checkbox' id='com2' name='comment' value='2'>
     <label for="2">Agressive driving</label><br>
-    <input type='checkbox' name='comment' value='3'>
+    <input type='checkbox' id='com3' name='comment' value='3'>
     <label for="3">Played mostly defensively</label><br>
-    <input type='checkbox' name='comment' value='4'>
+    <input type='checkbox' id='com4' name='comment' value='4'>
     <label for="4">Looks unstable / Could fall over</label><br>
-    <input type='checkbox' name='comment' value='5'>
+    <input type='checkbox' id='com5' name='comment' value='5'>
     <label for="5">Basically a GodBot</label><br>
     <label>Other: </label>
     <input type='text' id='commentOther'>
   </form>
 
   <br><br>
-  <button>
-      <a href='qr.html'>Generate QR Code</a>
+  <button id='compilationMsg' onclick='compile();'>
+    Generate QR Code
   </button>
 
 </body>
